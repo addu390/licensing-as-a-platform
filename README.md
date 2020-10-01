@@ -9,4 +9,9 @@ If you are an independent software vendor (ISV) or software publisher you will m
 
 Disclaimer 🚔: I had built a similar service back in 2018 at ClearTax India, in my role as a Software Engineer 1. However I roughly remember having more features such as dynamic addition of addons, licensing specific features and tons for dashboards for Sales, Business and developers. Maybe they will make the repository public someday! 
 
+#### Licensing Schema
+- Dark Blue: Master table for storing License, Package, Inclusion
+- Light Blue: Mapping tables, to link License with Packages and Package with Inclusions (one-to-many)
+<img src="https://pyblog.xyz/wp-content/uploads/2020/10/licensing_schema.png?raw=true" width="850"/>
+
 
