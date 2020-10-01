@@ -59,8 +59,8 @@ class Inclusion(BaseModel):
 
 
 class LicensePackage(BaseModel):
-    license = models.ForeignKey(License, related_name="license_package", on_delete=models.DO_NOTHING)
-    package = models.ForeignKey(Package, related_name="selected_package", on_delete=models.DO_NOTHING)
+    license = models.ForeignKey(License, on_delete=models.DO_NOTHING)
+    package = models.ForeignKey(Package, on_delete=models.DO_NOTHING)
 
     class Meta:
         db_table = "license_package"
