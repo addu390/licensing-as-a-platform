@@ -68,3 +68,27 @@ class Inclusion(BaseModel):
 
     def __str__(self):
         return self.title
+
+
+class LicensePackage(BaseModel):
+    license = models.ForeignKey(License, related_name="license_package", on_delete=models.DO_NOTHING)
+    package = models.ForeignKey(Package, related_name="selected_package", on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = "license_package"
+        verbose_name_plural = "License and Package"
+
+    def __str__(self):
+        return str(self.external_id)
+
+
+class InclusionPackage(BaseModel):
+    Inclusion = models.ForeignKey(License, related_name="inclusion_package", on_delete=models.DO_NOTHING)
+    package = models.ForeignKey(Package, related_name="selected_package", on_delete=models.DO_NOTHING)
+
+    class Meta:
+        db_table = "inclusion_package"
+        verbose_name_plural = "Inclusion and Package"
+
+    def __str__(self):
+        return str(self.external_id)
