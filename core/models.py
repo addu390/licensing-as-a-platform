@@ -1,18 +1,6 @@
 from django.db import models
 import uuid
-
-STATUS = (
-    ("TRIAL", 'Trial License'),
-    ("IN_PROGRESS", 'License activation in progress'),
-    ("BLOCKED", 'License Blocked'),
-    ("ACTIVE", 'License Active'),
-    ("EXPIRED", 'License Validity Expired')
-)
-
-BASE_STATUS = (
-    ("ACTIVE", "Active"),
-    ("IN_ACTIVE", "In Active"),
-)
+from .constants import LICENSE_STATUS, BASE_STATUS
 
 
 class BaseModel(models.Model):
@@ -29,7 +17,7 @@ class BaseModel(models.Model):
 
 class License(BaseModel):
     license_key = models.CharField(max_length=255, unique=True, default=str(uuid.uuid4()))
-    status = models.CharField(choices=STATUS, default="ACTIVE", max_length=100)
+    status = models.CharField(choices=LICENSE_STATUS, default="ACTIVE", max_length=100)
     activation_date = models.DateTimeField(null=True, blank=True)
     expiry_date = models.DateTimeField(null=True, blank=True)
 
