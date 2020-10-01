@@ -9,7 +9,7 @@ STATUS = (
     ("EXPIRED", 'License Validity Expired')
 )
 
-BUCKET_STATUS = (
+BASE_STATUS = (
     ("ACTIVE", "Active"),
     ("IN_ACTIVE", "In Active"),
 )
@@ -41,16 +41,30 @@ class License(BaseModel):
         return self.license_key
 
 
-class Bucket(BaseModel):
-    name = models.CharField(max_length=100)
+class Package(BaseModel):
+    title = models.CharField(max_length=255)
     content = models.TextField(null=True)
     price = models.IntegerField(default=0)
-    status = models.CharField(choices=BUCKET_STATUS, default="ACTIVE", max_length=100)
+    status = models.CharField(choices=BASE_STATUS, default="ACTIVE", max_length=100)
     type = models.BooleanField(default=True)
 
     class Meta:
-        db_table = "bucket"
-        verbose_name_plural = "bucket"
+        db_table = "package"
+        verbose_name_plural = "package"
 
     def __str__(self):
-        return self.name
+        return self.title
+
+
+class Inclusion(BaseModel):
+    title = models.CharField(max_length=255)
+    content = models.TextField(null=True)
+    status = models.CharField(choices=BASE_STATUS, default="ACTIVE", max_length=100)
+    type = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = "inclusion"
+        verbose_name_plural = "inclusion"
+
+    def __str__(self):
+        return self.title
