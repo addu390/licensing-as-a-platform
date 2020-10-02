@@ -6,10 +6,7 @@ from .constants import LICENSE_STATUS, BASE_STATUS
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    external_id = models.CharField(
-        max_length=100,
-        unique=True,
-        default=str(uuid.uuid4()))
+    external_id = models.CharField(max_length=100, unique=True, default=str(uuid.uuid4()))
 
     class Meta:
         abstract = True
