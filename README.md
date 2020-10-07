@@ -14,6 +14,12 @@ Disclaimer 🚔: I had built a similar service back in 2018 at ClearTax India, i
 - Light Blue: Mapping tables, to link License with Packages and Package with Inclusions (one-to-many)
 <img src="https://pyblog.xyz/wp-content/uploads/2020/10/licensing_schema.png?raw=true" width="850"/>
 
+#### Example
+- Let's say you are buying "Microsoft 365 Business Standard", which includes Outlook, word, Excel and PowerPoint.
+- [Microsoft 365 Business Standard](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products) is a "Package".
+- Outlook, word, Excel and PowerPoint are the Inclusions under the Package.
+- License is created for a User, where a License can contain M number of Packages.
+
 #### Contracts
 - License Creation
 Note: Before creating a License, ensure a Package, Inclusion and Package-Inclusion mappings are already created
