@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-from .constants import LICENSE_STATUS, BASE_STATUS
+from .constants import LICENSE_STATUS, BASE_STATUS, ACTIVE
 
 
 class BaseModel(models.Model):
@@ -14,7 +14,7 @@ class BaseModel(models.Model):
 
 class License(BaseModel):
     license_key = models.CharField(max_length=255, unique=True, default=str(uuid.uuid4()))
-    status = models.CharField(choices=LICENSE_STATUS, default="ACTIVE", max_length=100)
+    status = models.CharField(choices=LICENSE_STATUS, default=ACTIVE, max_length=100)
     activation_date = models.DateTimeField(null=True, blank=True)
     expiry_date = models.DateTimeField(null=True, blank=True)
 
@@ -30,7 +30,7 @@ class Package(BaseModel):
     title = models.CharField(max_length=255)
     content = models.TextField(null=True)
     price = models.IntegerField(default=0)
-    status = models.CharField(choices=BASE_STATUS, default="ACTIVE", max_length=100)
+    status = models.CharField(choices=BASE_STATUS, default=ACTIVE, max_length=100)
     type = models.BooleanField(default=True)
 
     class Meta:

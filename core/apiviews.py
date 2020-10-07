@@ -1,5 +1,6 @@
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
+from .constants import ACTIVE
 
 from core.models import Package
 from rest_framework import status
@@ -18,7 +19,7 @@ class Create(APIView):
         license_status = request.data.get("status")
         utc = pytz.timezone(TIME_ZONE)
 
-        package_object = get_object_or_404(Package, external_id=package_id, status="ACTIVE")
+        package_object = get_object_or_404(Package, external_id=package_id, status=ACTIVE)
         license_data = {
             'status': license_status,
             'activation_date': datetime.now(utc),
