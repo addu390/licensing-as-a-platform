@@ -17,8 +17,9 @@ Disclaimer 🚔: I had built a similar service back in 2018 at ClearTax India, i
 #### Example
 - Let's say you are buying "Microsoft 365 Business Standard", which includes Outlook, word, Excel and PowerPoint.
 - [Microsoft 365 Business Standard](https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products) is a "Package".
-- Outlook, word, Excel and PowerPoint are the Inclusions under the Package.
+- Outlook, word, Excel and PowerPoint are the Inclusions under that Package.
 - License is created for a User, where a License can contain M number of Packages.
+<img src="https://pyblog.xyz/wp-content/uploads/2020/10/ms-plans.png?raw=true" width="850"/>
 
 #### Contracts
 - License Creation
