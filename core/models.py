@@ -1,6 +1,6 @@
 from django.db import models
 import uuid
-from .constants import LICENSE_STATUS, BASE_STATUS, ACTIVE
+from .constants import LICENSE_STATUS, BASE_STATUS, ACTIVE, LICENSE, PACKAGE, INCLUSION
 
 
 class BaseModel(models.Model):
@@ -19,8 +19,8 @@ class License(BaseModel):
     expiry_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
-        db_table = "license"
-        verbose_name_plural = "License"
+        db_table = LICENSE
+        verbose_name_plural = LICENSE
 
     def __str__(self):
         return self.license_key
@@ -34,8 +34,8 @@ class Package(BaseModel):
     type = models.BooleanField(default=True)
 
     class Meta:
-        db_table = "package"
-        verbose_name_plural = "package"
+        db_table = PACKAGE
+        verbose_name_plural = PACKAGE
 
     def __str__(self):
         return self.title
@@ -44,12 +44,12 @@ class Package(BaseModel):
 class Inclusion(BaseModel):
     title = models.CharField(max_length=255)
     content = models.TextField(null=True)
-    status = models.CharField(choices=BASE_STATUS, default="ACTIVE", max_length=100)
+    status = models.CharField(choices=BASE_STATUS, default=ACTIVE, max_length=100)
     type = models.BooleanField(default=True)
 
     class Meta:
-        db_table = "inclusion"
-        verbose_name_plural = "inclusion"
+        db_table = INCLUSION
+        verbose_name_plural = INCLUSION
 
     def __str__(self):
         return self.title

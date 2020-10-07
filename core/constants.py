@@ -8,6 +8,7 @@ IN_ACTIVE = "IN_ACTIVE"
 
 STATUS = "status"
 PACKAGE = "package"
+INCLUSION = "inclusion"
 ACTIVATION_DATE = "activation_date"
 EXPIRY_DATE = "expiry_date"
 LICENSE = "license"
