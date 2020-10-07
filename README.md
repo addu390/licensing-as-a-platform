@@ -14,4 +14,9 @@ Disclaimer 🚔: I had built a similar service back in 2018 at ClearTax India, i
 - Light Blue: Mapping tables, to link License with Packages and Package with Inclusions (one-to-many)
 <img src="https://pyblog.xyz/wp-content/uploads/2020/10/licensing_schema.png?raw=true" width="850"/>
 
+#### Contracts
+- License Creation
+Note: Before creating a License, ensure a Package, Inclusion and Package-Inclusion mappings are already created
+<img src="https://pyblog.xyz/wp-content/uploads/2020/10/license-post.png?raw=true" width="850"/>
+
 

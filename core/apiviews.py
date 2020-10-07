@@ -37,6 +37,7 @@ class Create(APIView):
                     license_package_serializer = LicensePackageSerializer(data=license_package_data)
                     if license_package_serializer.is_valid(raise_exception=True):
                         license_package_serializer.save()
+                    return Response(license_serializer.data, status=status.HTTP_201_CREATED)
             except:
                 return Response(license_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
