@@ -8,3 +8,4 @@ python-decouple==3.6
 pytz==2021.3
 six==1.16.0
 sqlparse==0.4.2
+django-debug-toolbar==3.2.4
