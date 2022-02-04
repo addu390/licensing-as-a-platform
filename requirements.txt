@@ -1,0 +1,10 @@
+Django==4.0.2
+django-redis==5.2.0
+djangorestframework==3.13.1
+mysqlclient==2.1.0
+Pillow==9.0.0
+pyparsing==3.0.7
+python-decouple==3.6
+pytz==2021.3
+six==1.16.0
+sqlparse==0.4.2
