@@ -4,9 +4,9 @@ from rest_framework.views import APIView
 from . import cache_views
 from .constants import ACTIVE, LICENSE, PLAN, STATUS, ACTIVATION_DATE, EXPIRY_DATE
 
-from core.models import Plan, License
+from core.models import Plan, License, Feature
 from rest_framework import status
-from core.serializers import LicenseSerializer, LicensePlanSerializer
+from core.serializers import LicenseSerializer, LicensePlanSerializer, PlanSerializer, FeatureSerializer
 from licensing_platform.settings import TIME_ZONE
 from django.db import transaction, IntegrityError
 from rest_framework.response import Response
@@ -14,14 +14,13 @@ from datetime import datetime, timedelta
 import pytz
 
 
-class Create(APIView):
-
+class CreateLicense(APIView):
     def post(self, request):
         plan_id = request.data.get(PLAN)
         license_status = request.data.get(STATUS)
         utc = pytz.timezone(TIME_ZONE)
 
-        plan_object = get_object_or_404(Plan, external_id=plan_id, status=ACTIVE)
+        plan_object = get_object_or_404(Plan, external_id=plan_id)
         license_data = {
             STATUS: license_status,
             ACTIVATION_DATE: datetime.now(utc),
@@ -41,7 +40,7 @@ class Create(APIView):
                     if license_plan_serializer.is_valid(raise_exception=True):
                         license_plan_serializer.save()
 
-                    update_license(license_object.license_id)
+                    update_license_cache(license_object.license_id)
                     return Response(license_serializer.data, status=status.HTTP_201_CREATED)
             except:
                 return Response(license_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -51,23 +50,38 @@ class LicenseDetails(APIView):
     def get(self, request, license_id):
         license_data = cache_views.get(license_id)
         if not license_data:
-            license_data = update_license(license_id)
+            license_data = update_license_cache(license_id)
         return Response(license_data)
 
 
 class LicenseStatus(APIView):
     def put(self, request, license_id):
-        serializer = LicenseSerializer(get_object_or_404(license_id, License),
-                                       data=request.data, partial=True, fields=('status',))
+        license_object = get_object_or_404(License, license_id=license_id)
+        serializer = LicenseSerializer(license_object, data=request.data, partial=True, fields=('status',))
         if serializer.is_valid(raise_exception=True):
             try:
                 serializer.save()
+                update_license_cache(license_id)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def update_license(license_id):
+class PlanDetails(APIView):
+    def get(self, request, plan_id):
+        plan_object = get_object_or_404(Plan, external_id=plan_id)
+        serializer = PlanSerializer(plan_object)
+        return Response(serializer.data)
+
+
+class FeatureDetails(APIView):
+    def get(self, request, feature_id):
+        feature_object = get_object_or_404(Feature, external_id=feature_id)
+        serializer = FeatureSerializer(feature_object)
+        return Response(serializer.data)
+
+
+def update_license_cache(license_id):
     license_object = get_object_or_404(License, license_id=license_id)
     serializer = LicenseSerializer(license_object)
     license_data = dict(serializer.data)
