@@ -10,6 +10,6 @@ urlpatterns = [
     path("feature/<slug:feature_id>/", FeatureDetails.as_view(), name="Feature Details"),
 ]
 
-admin.site.site_header = 'Licensing Administration Dashboard'
+admin.site.site_header = 'Licensing Administration Dashboard V2'
 admin.site.index_title = 'Index'
 admin.site.site_title = 'LaaS'
