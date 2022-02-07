@@ -21,7 +21,7 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID }}
 
           working-directory: /home/ubuntu/licensing-as-a-platform
-          command: /bin/sh ./deploy.sh
+          command: /bin/sh /home/ubuntu/licensing-as-a-platform/deploy.sh
           comment: Hello world!
 
       # Catch SSM outputs
