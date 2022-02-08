@@ -14,7 +14,10 @@ ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 dependencies
 RUN apk update \
-    && apk add mariadb-dev gcc python3-dev musl-dev libjpeg-dev
+    && apk add mariadb-dev gcc python3-dev musl-dev libxml2-dev libxslt-dev libffi-dev openssl-dev curl
+RUN apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
+RUN pip install Pillow
+
 
 # lint
 RUN pip install --upgrade pip
