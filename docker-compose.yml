@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./licensing-as-a-platform
+      dockerfile: Dockerfile.prod
+    command: gunicorn licensing_platform.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/home/licensing-as-a-platform/web/staticfiles
+      - media_volume:/home/licensing-as-a-platform/web/mediafiles
+    expose:
+      - 8000
+  nginx:
+    build: nginx
+    volumes:
+      - static_volume:/home/licensing-as-a-platform/web/staticfiles
+      - media_volume:/home/licensing-as-a-platform/web/mediafiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
