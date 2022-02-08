@@ -22,6 +22,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
       - 80:80
+      - 8000:8000
     depends_on:
       - web
 
