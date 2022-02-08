@@ -14,7 +14,8 @@ ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 dependencies
 RUN apk update \
-    && apk add gcc python3-dev musl-dev libmysqlclient-dev
+    && apk add gcc python3-dev musl-dev
+RUN apt-get install -y libmysqlclient-dev
 
 # lint
 RUN pip install --upgrade pip
