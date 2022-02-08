@@ -17,7 +17,7 @@ services:
       - static_volume:/home/licensing-as-a-platform/web/staticfiles
       - media_volume:/home/licensing-as-a-platform/web/mediafiles
     ports:
-      - 1337:80
+      - 80:80
     depends_on:
       - web
 
