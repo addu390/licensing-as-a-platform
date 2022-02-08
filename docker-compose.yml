@@ -13,9 +13,11 @@ services:
       - 8000
   nginx:
     build: nginx
+    restart: always
     volumes:
       - static_volume:/home/licensing-as-a-platform/web/staticfiles
       - media_volume:/home/licensing-as-a-platform/web/mediafiles
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
       - 80:80
     depends_on:
