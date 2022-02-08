@@ -9,6 +9,8 @@ services:
     volumes:
       - static_volume:/home/licensing-as-a-platform/web/staticfiles
       - media_volume:/home/licensing-as-a-platform/web/mediafiles
+    ports:
+      - 8000:8000
     expose:
       - 8000
   nginx:
