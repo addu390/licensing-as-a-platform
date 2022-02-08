@@ -3,9 +3,9 @@ version: '3.3'
 services:
   web:
     build:
-      context: ./licensing-as-a-platform
+      context: .
       dockerfile: Dockerfile.prod
-    command: gunicorn licensing_platform.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi
     volumes:
       - static_volume:/home/licensing-as-a-platform/web/staticfiles
       - media_volume:/home/licensing-as-a-platform/web/mediafiles
