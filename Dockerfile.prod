@@ -14,14 +14,13 @@ ENV PYTHONUNBUFFERED 1
 
 # install psycopg2 dependencies
 RUN apk update \
-    && apk add mariadb-dev gcc python3-dev musl-dev
+    && apk add mariadb-dev gcc python3-dev musl-dev libjpeg-dev
 
 # lint
 RUN pip install --upgrade pip
 
 # install dependencies
 COPY ./requirements.txt .
-RUN python3.9 -m pip install --upgrade pip setuptools wheel
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/licensing-as-a-platform/wheels -r requirements.txt
 
 
