@@ -5,27 +5,27 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi:application
+    command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi
     volumes:
       - static_volume:/home/licensing-as-a-platform/web/staticfiles
       - media_volume:/home/licensing-as-a-platform/web/mediafiles
+    dns:
+      - "8.8.8.8"
     ports:
-      - 8000:8000
+      - "8000:8000"
     expose:
-      - 8000
+      - "8000"
   nginx:
     build: nginx
     restart: always
     volumes:
       - static_volume:/home/licensing-as-a-platform/web/staticfiles
       - media_volume:/home/licensing-as-a-platform/web/mediafiles
-      - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - web
 
 volumes:
-  postgres_data:
-  static_volume:
   media_volume:
+  static_volume:
