@@ -4,6 +4,13 @@ services:
   web:
     image: thenextbigproject/django-licensing:latest
     command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi --workers=4
+    environment:
+      - DEBUG
+      - DATABASE_NAME
+      - DATABASE_USER
+      - DATABASE_PASSWORD
+      - HOST_ENDPOINT
+      - REDIS_LOCATION
     volumes:
       - static_volume:/app/static
       - media_volume:/app/media
