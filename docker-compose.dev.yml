@@ -2,7 +2,8 @@ version: '3.8'
 
 services:
   web:
-    image: thenextbigproject/django-licensing:latest
+    build:
+      context: .
     command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi --workers=4
     volumes:
       - static_volume:/app/static
@@ -13,7 +14,7 @@ services:
       - django-network
 
   nginx:
-    image: thenextbigproject/nginx-licensing:latest
+    build: nginx
     restart: always
     volumes:
       - static_volume:/app/static

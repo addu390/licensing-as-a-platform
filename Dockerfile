@@ -13,7 +13,4 @@ RUN python3.9 -m pip install -r requirements.txt
 RUN python3.9 -m pip install psycopg2-binary
 RUN sudo ufw allow 8000
 
-RUN python3.9 manage.py migrate
-RUN python3.9 manage.py collectstatic --noinput
-
 EXPOSE 8000
