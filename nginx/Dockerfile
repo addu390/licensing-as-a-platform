@@ -1,4 +1,6 @@
-FROM nginx:1.21-alpine
+FROM nginx:stable-alpine
 
-RUN rm /etc/nginx/nginx.conf
-COPY nginx.conf /etc/nginx
+COPY default.conf /etc/nginx
+COPY default.conf /etc/nginx/conf.d
+
+EXPOSE 80

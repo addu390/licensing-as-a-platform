@@ -5,26 +5,31 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi
+    command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi --workers=4
     volumes:
-      - static_volume:/home/licensing-as-a-platform/web/staticfiles
-      - media_volume:/home/licensing-as-a-platform/web/mediafiles
-    dns:
-      - "8.8.8.8"
-    ports:
-      - "8000:8000"
+      - static_volume:/app/static
+      - media_volume:/app/static
     expose:
       - "8000"
+    networks:
+      - django-network
+
   nginx:
     build: nginx
     restart: always
     volumes:
-      - static_volume:/home/licensing-as-a-platform/web/staticfiles
-      - media_volume:/home/licensing-as-a-platform/web/mediafiles
+      - static_volume:/app/static
+      - media_volume:/app/static
     ports:
       - "80:80"
     depends_on:
       - web
+    networks:
+      - django-network
+
+networks:
+  django-network:
+    name: django-network
 
 volumes:
   media_volume:
