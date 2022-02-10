@@ -2,7 +2,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 
 from . import cache_views
-from .constants import ACTIVE, LICENSE, PLAN, STATUS, ACTIVATION_DATE, EXPIRY_DATE
+from .constants import LICENSE, PLAN, STATUS, ACTIVATION_DATE, EXPIRY_DATE
 
 from core.models import Plan, License, Feature
 from rest_framework import status

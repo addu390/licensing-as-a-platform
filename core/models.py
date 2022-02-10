@@ -64,7 +64,7 @@ class Feature(BaseModel):
 
 
 class LicensePlan(BaseModel):
-    license = models.ForeignKey(License, to_field='external_id', on_delete=models.DO_NOTHING)
+    license = models.ForeignKey(License, to_field='license_id', on_delete=models.DO_NOTHING)
     plan = models.ForeignKey(Plan, to_field='external_id', on_delete=models.DO_NOTHING)
 
     class Meta:
@@ -88,7 +88,7 @@ class FeaturePlan(BaseModel):
 
 
 class LicenseFeature(BaseModel):
-    license = models.ForeignKey(License, to_field='external_id', on_delete=models.DO_NOTHING)
+    license = models.ForeignKey(License, to_field='license_id', on_delete=models.DO_NOTHING)
     plan = models.ForeignKey(Plan, to_field='external_id', on_delete=models.DO_NOTHING)
     feature = models.ForeignKey(Feature, to_field='external_id', on_delete=models.DO_NOTHING)
     usage = models.IntegerField(default=0)
