@@ -5,13 +5,6 @@ services:
     build:
       context: .
     command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi --workers=4
-    environment:
-      - DEBUG: ${DEBUG}
-      - DATABASE_NAME: ${DATABASE_NAME}
-      - DATABASE_USER: ${DATABASE_USER}
-      - DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      - HOST_ENDPOINT: ${HOST_ENDPOINT}
-      - REDIS_LOCATION: ${REDIS_LOCATION}
     volumes:
       - static_volume:/app/static
       - media_volume:/app/media
