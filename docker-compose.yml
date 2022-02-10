@@ -7,7 +7,7 @@ services:
     command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi --workers=4
     volumes:
       - static_volume:/app/static
-      - media_volume:/app/static
+      - media_volume:/app/media
     expose:
       - "8000"
     networks:
@@ -18,7 +18,7 @@ services:
     restart: always
     volumes:
       - static_volume:/app/static
-      - media_volume:/app/static
+      - media_volume:/app/media
     ports:
       - "80:80"
     depends_on:
