@@ -4,7 +4,6 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile.prod
     command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi --workers=4
     volumes:
       - static_volume:/app/static
