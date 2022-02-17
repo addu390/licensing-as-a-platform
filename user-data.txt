@@ -1,0 +1,29 @@
+Content-Type: multipart/mixed; boundary="//"
+MIME-Version: 1.0
+
+--//
+Content-Type: text/cloud-config; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+runcmd:
+ - echo "For the first boot"
+
+cloud_final_modules:
+- [scripts-user, always]
+
+--//
+Content-Type: text/x-shellscript; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment; filename="userdata.txt"
+
+#!/bin/sh
+sudo chmod 666 /var/run/docker.sock
+echo 'export DEBUG=False DATABASE_NAME=licensing DATABASE_USER=admin DATABASE_PASSWORD=xxxx HOST_ENDPOINT=rds-licensing.xxxx.ca-central-1.rds.amazonaws.com REDIS_LOCATION=redis://127.0.0.1:6379/' > ~/licensing.sh
+chmod +x ~/licensing.sh
+sudo cp ~/licensing.sh /etc/profile.d/licensing.sh
+source /etc/profile
+--//--
