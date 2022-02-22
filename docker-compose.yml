@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   web:
@@ -27,6 +27,12 @@ services:
       - media_volume:/app/media
     ports:
       - "80:80"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: ecs-cluster-licensing
+        awslogs-region: ca-central-1
+        awslogs-stream-prefix: web
     depends_on:
       - web
     networks:
@@ -34,7 +40,6 @@ services:
 
 networks:
   django-network:
-    name: django-network
 
 volumes:
   media_volume:
