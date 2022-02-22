@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from rest_framework.generics import get_object_or_404
 from rest_framework.views import APIView
 
@@ -87,3 +88,8 @@ def update_license_cache(license_id):
     license_data = dict(serializer.data)
     cache_views.update(license_id, license_data)
     return license_data
+
+
+class Health(APIView):
+    def get(self, request):
+        return HttpResponse("OK")

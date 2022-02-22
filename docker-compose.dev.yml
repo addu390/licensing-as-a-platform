@@ -4,7 +4,13 @@ services:
   web:
     build:
       context: .
-    command: gunicorn --bind 0.0.0.0:8000 licensing_platform.wsgi --workers=4
+    environment:
+      - DEBUG
+      - DATABASE_NAME
+      - DATABASE_USER
+      - DATABASE_PASSWORD
+      - HOST_ENDPOINT
+      - REDIS_LOCATION
     volumes:
       - static_volume:/app/static
       - media_volume:/app/media
@@ -14,7 +20,7 @@ services:
       - django-network
 
   nginx:
-    build: nginx
+    build: nginx_stage
     restart: always
     volumes:
       - static_volume:/app/static
