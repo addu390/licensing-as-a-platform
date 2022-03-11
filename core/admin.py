@@ -17,11 +17,12 @@ class FeatureInline(admin.TabularInline):
 
 # Register your models here.
 admin.site.register(Feature)
+admin.register(Plan)
+admin.site.register(FeaturePlan)
 @admin.register(License)
 class LicenseAdmin(admin.ModelAdmin):
     list_display = ('license_id', 'view_plans_link', 'license_status')
     inlines = [PlanInline,FeatureInline]
-
     
     def view_plans_link(self,obj):
         url = (
@@ -36,8 +37,6 @@ class LicenseAdmin(admin.ModelAdmin):
 class LicensePlanAdmin(admin.ModelAdmin):
     list_display = ('display_license', 'display_plan')
     list_filter = ('license_id',)
-admin.register(Plan)
-admin.site.register(FeaturePlan)
 @admin.register(LicenseFeature)
 class LicenseFeatureAdmin(admin.ModelAdmin):
     list_display = ('display_license','display_plan', 'display_feature')

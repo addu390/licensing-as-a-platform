@@ -1,3 +1,5 @@
+# General constants
+ACTIVE_STATUS = 'ACTIVE'
 # Database model constants
 STATUS = "status"
 PLAN = "plan"
