@@ -30,7 +30,7 @@ class License(BaseModel):
 
     def license_status(self):
         return self.status == ACTIVE_STATUS
-        
+
     license_status.boolean = True
 
     def __str__(self):
@@ -48,6 +48,9 @@ class Plan(BaseModel):
     class Meta:
         db_table = PLAN
         verbose_name_plural = PLAN
+
+    def display_plan(self):
+        return str(self.name)
 
     def __str__(self):
         return self.name
@@ -87,6 +90,9 @@ class LicensePlan(BaseModel):
 
     display_license.short_description = 'License ID'
 
+    def __str__(self):
+        return "%s -> %s" % (str(self.license), str(self.plan))    
+
 
 class FeaturePlan(BaseModel):
     feature = models.ForeignKey(Feature, to_field='external_id', related_name="feature_plan", on_delete=models.DO_NOTHING)
@@ -96,6 +102,16 @@ class FeaturePlan(BaseModel):
         db_table = "feature_plan"
         verbose_name_plural = "Feature and Plan"
 
+
+    def display_feature(self):
+        return str(self.feature)
+
+    display_feature.short_description = 'Feature'
+
+    def display_plan(self):
+        return str(self.plan)
+
+    display_plan.short_description = 'Plan'
 
     def __str__(self):
         return "%s -> %s" % (str(self.plan), str(self.feature))
@@ -127,3 +143,6 @@ class LicenseFeature(BaseModel):
         return str(self.license)
 
     display_license.short_description = 'License ID'
+
+    def __str__(self):
+        return "%s -> %s -> %s" % (str(self.license), str(self.plan), str(self.feature))
