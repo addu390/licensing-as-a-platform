@@ -30,7 +30,6 @@ class License(BaseModel):
 
     def license_status(self):
         return self.status == ACTIVE
-
     license_status.boolean = True
 
     def __str__(self):
@@ -48,9 +47,6 @@ class Plan(BaseModel):
     class Meta:
         db_table = PLAN
         verbose_name_plural = PLAN
-
-    def display_plan(self):
-        return str(self.name)
 
     def __str__(self):
         return self.name
@@ -80,16 +76,6 @@ class LicensePlan(BaseModel):
         verbose_name_plural = "License and Plan"
 
 
-    def display_plan(self):
-        return str(self.plan)
-
-    display_plan.short_description = 'Plan'
-
-    def display_license(self):
-        return str(self.license)
-
-    display_license.short_description = 'License ID'
-
     def __str__(self):
         return "%s -> %s" % (str(self.license), str(self.plan))    
 
@@ -102,16 +88,6 @@ class FeaturePlan(BaseModel):
         db_table = "feature_plan"
         verbose_name_plural = "Feature and Plan"
 
-
-    def display_feature(self):
-        return str(self.feature)
-
-    display_feature.short_description = 'Feature'
-
-    def display_plan(self):
-        return str(self.plan)
-
-    display_plan.short_description = 'Plan'
 
     def __str__(self):
         return "%s -> %s" % (str(self.plan), str(self.feature))
@@ -128,21 +104,6 @@ class LicenseFeature(BaseModel):
         db_table = "license_feature"
         verbose_name_plural = "License and Feature"
 
-
-    def display_feature(self):
-        return str(self.feature)
-
-    display_feature.short_description = 'Feature'
-
-    def display_plan(self):
-        return str(self.plan)
-
-    display_plan.short_description = 'Plan'
-
-    def display_license(self):
-        return str(self.license)
-
-    display_license.short_description = 'License ID'
 
     def __str__(self):
         return "%s -> %s -> %s" % (str(self.license), str(self.plan), str(self.feature))

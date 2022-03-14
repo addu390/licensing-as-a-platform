@@ -24,7 +24,7 @@ class FeaturePlanInline(admin.TabularInline):
 admin.site.register(Feature)
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
-    list_display = ('display_plan', 'view_feature_link')
+    list_display = ('name', 'view_feature_link')
     inlines = [FeaturePlanInline]
 
     def view_feature_link(self,obj):
@@ -36,10 +36,14 @@ class PlanAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">view</a>', url)
     view_feature_link.short_description = 'Linked feature'
 
+
+
 @admin.register(FeaturePlan)
 class FeaturePlanAdmin(admin.ModelAdmin):
-    list_display = ('display_feature', 'display_plan')
+    list_display = ('feature', 'plan')
     list_filter = ('plan_id',)
+
+
 
 @admin.register(License)
 class LicenseAdmin(admin.ModelAdmin):
@@ -56,14 +60,16 @@ class LicenseAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">{} Plan(s)</a>', url, count)
     view_plans_link.short_description = 'Linked Plans'
 
+
 @admin.register(LicensePlan)
 class LicensePlanAdmin(admin.ModelAdmin):
-    list_display = ('display_license', 'display_plan')
+    list_display = ('license', 'plan')
     list_filter = ('license_id',)
+
 
 @admin.register(LicenseFeature)
 class LicenseFeatureAdmin(admin.ModelAdmin):
-    list_display = ('display_license','display_plan', 'display_feature')
+    list_display = ('license','plan', 'feature')
     list_filter = ('license_id', 'feature_id')
 
 
