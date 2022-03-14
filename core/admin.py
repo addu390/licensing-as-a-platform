@@ -1,8 +1,6 @@
 from gc import get_objects
 from django.contrib import admin
-from django.forms.models import BaseInlineFormSet
-from django.db.models import *
-from django.urls import reverse,resolve
+from django.urls import reverse
 from django.utils.http import urlencode
 from django.utils.html import format_html
 from .models import Feature, License, LicensePlan, Plan, FeaturePlan, LicenseFeature
