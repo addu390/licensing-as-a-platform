@@ -5,6 +5,7 @@ from django.utils.http import urlencode
 from django.utils.html import format_html
 from .models import Feature, License, LicensePlan, Plan, FeaturePlan, LicenseFeature
 
+
 class PlanInline(admin.TabularInline):
     model = LicensePlan
     extra = 0
@@ -22,12 +23,14 @@ class FeaturePlanInline(admin.TabularInline):
 
 # Register your models here.
 admin.site.register(Feature)
+
+
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
     list_display = ('name', 'view_feature_link')
     inlines = [FeaturePlanInline]
 
-    def view_feature_link(self,obj):
+    def view_feature_link(self, obj):
         url = (
             reverse("admin:core_featureplan_changelist")
             + "?"
@@ -37,20 +40,18 @@ class PlanAdmin(admin.ModelAdmin):
     view_feature_link.short_description = 'Linked feature'
 
 
-
 @admin.register(FeaturePlan)
 class FeaturePlanAdmin(admin.ModelAdmin):
     list_display = ('feature', 'plan')
     list_filter = ('plan_id',)
 
 
-
 @admin.register(License)
 class LicenseAdmin(admin.ModelAdmin):
-    list_display = ('license_id', 'view_plans_link', 'license_status')
-    inlines = [PlanInline,FeatureInline]
-    
-    def view_plans_link(self,obj):
+    list_display = ('license_id', 'view_plans_link', 'status')
+    inlines = [PlanInline, FeatureInline]
+
+    def view_plans_link(self, obj):
         count = obj.licenseplan_set.count()
         url = (
             reverse("admin:core_licenseplan_changelist")
@@ -69,7 +70,5 @@ class LicensePlanAdmin(admin.ModelAdmin):
 
 @admin.register(LicenseFeature)
 class LicenseFeatureAdmin(admin.ModelAdmin):
-    list_display = ('license','plan', 'feature')
+    list_display = ('license', 'plan', 'feature')
     list_filter = ('license_id', 'feature_id')
-
-

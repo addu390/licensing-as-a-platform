@@ -28,9 +28,6 @@ class License(BaseModel):
         db_table = LICENSE
         verbose_name_plural = LICENSE
 
-    def license_status(self):
-        return self.status == ACTIVE
-    license_status.boolean = True
 
     def __str__(self):
         return self.license_id
