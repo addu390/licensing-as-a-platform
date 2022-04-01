@@ -5,6 +5,10 @@ FEATURE = "feature"
 ACTIVATION_DATE = "activation_date"
 EXPIRY_DATE = "expiry_date"
 LICENSE = "license"
+TYPE = "type"
+PRICE = "price"
+NAME = "name"
+DESCRIPTION = "description"
 
 # Enum constants
 TRIAL = "TRIAL"
