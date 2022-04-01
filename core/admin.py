@@ -1,4 +1,3 @@
-from gc import get_objects
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.http import urlencode

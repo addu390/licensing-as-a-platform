@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 from .constants import *
+from licensing_platform.storage import PrivateMediaStorage
 
 
 def new_uuid():
@@ -38,7 +39,8 @@ class License(BaseModel):
 class Plan(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True)
-    image = models.FileField(blank=True, null=True)
+    image = models.FileField(blank=True, null=True,
+                             storage=PrivateMediaStorage())
     type = models.CharField(choices=PLAN_TYPE, default=REGULAR, max_length=50)
     price = models.IntegerField(default=0)
     status = models.CharField(
@@ -55,7 +57,8 @@ class Plan(BaseModel):
 class Feature(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True)
-    image = models.FileField(blank=True, null=True)
+    image = models.FileField(blank=True, null=True,
+                             storage=PrivateMediaStorage())
     type = models.CharField(choices=FEATURE_TYPE, default=LIMIT, max_length=50)
     status = models.CharField(
         choices=BASE_STATUS, default=ACTIVE, max_length=100)
