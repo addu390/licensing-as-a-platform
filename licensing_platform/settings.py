@@ -3,16 +3,21 @@ from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'cwf6brhc&dq-*p=^cbz58(-9@+(sabxd1g2mv9d!3ah^k+!-1='
+
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_REGION = config('AWS_REGION')
-
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
+AWS_REGION = config('AWS_REGION')
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+AWS_LOCATION = 'static'
+STATICFILES_STORAGE = 'licensing_platform.storage.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN,
+                                 AWS_LOCATION)
+
+AWS_STATIC_LOCATION = 'static'
 
 CACHE_TTL = 10
 DEBUG = True
@@ -109,8 +114,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AWS_PRIVATE_MEDIA_LOCATION = 'media/private'
-PRIVATE_FILE_STORAGE = 'licensing_platform.storage_backends.PrivateMediaStorage'
+PRIVATE_FILE_STORAGE = 'licensing_platform.storage.PrivateMediaStorage'
