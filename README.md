@@ -13,3 +13,15 @@ If you are an independent software vendor (ISV) or software publisher you will m
 - Create a new file `.env` at the root of the project with the contents of `.env.example` with the correct values. 
 - Start the application: `docker-compose -f docker-compose.dev.yml up`, which builds the local project instead of picking it from docker-hub.
 - To run the latest build in docker hub, run: `docker-compose up`
+
+## Production deployment
+
+- Use ECS CLI to start the server: `ecs-cli compose --project-name licensing-cluster service up --create-log-groups --cluster-config licensing-cluster`
+    - Note: Use cloud formation to allocation resources: VPC, Subnet(s), Security group(s) and load balancer as defined in `ecs-params.yml`
+    - AWS Log group(s) and task definitions are defined in `docker-compose.yml`
+    
+- Check the status of the service: `ecs-cli compose --project-name licensing-cluster service ps --cluster-config licensing-cluster`
+- Additionally, configure other resources in `cloud-formation.yml` and update the existing stack or create a new stack in cloud formation console.
+    
+
+
