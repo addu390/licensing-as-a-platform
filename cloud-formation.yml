@@ -1,3 +1,4 @@
+AWSTemplateFormatVersion: 2010-09-09
 Description: "AWS Cloudformation template to create resources required to run tasks on an ECS cluster."
 Resources:
     EC2EIP:

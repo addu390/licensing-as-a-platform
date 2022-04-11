@@ -16,6 +16,7 @@ If you are an independent software vendor (ISV) or software publisher you will m
 
 ## Production deployment
 
+- Configure cluster: `ecs-cli up --cluster-config licensing-cluster`
 - Use ECS CLI to start the server: `ecs-cli compose --project-name licensing-cluster service up --create-log-groups --cluster-config licensing-cluster`
     - Note: Use cloud formation to allocation resources: VPC, Subnet(s), Security group(s) and load balancer as defined in `ecs-params.yml`
     - AWS Log group(s) and task definitions are defined in `docker-compose.yml`
